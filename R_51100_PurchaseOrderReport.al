@@ -1,8 +1,12 @@
-report 51100 "Purchase Order"
+report 51100 "Purchase Order Report"
 {
     UsageCategory = ReportsAndAnalysis;
     ApplicationArea = All;
-    DefaultRenderingLayout = LayoutName;
+    AdditionalSearchTerms = 'Purchase Order Report';
+    DefaultLayout = RDLC;
+    RDLCLayout = 'Purchase Order Report.rdl'
+
+
 
     dataset
     {

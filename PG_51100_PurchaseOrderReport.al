@@ -124,4 +124,18 @@ page 51100 "Purchase Order Report"
             }
         }
     }
+
+    trigger OnOpenPage()
+    var
+        QuerySummary: Query "Purchase Order";
+    begin
+        if QuerySummary.Open() then begin
+            while QuerySummary.Read() do begin
+                rec.Init();
+
+            end;
+        end;
+    end;
+
+
 }

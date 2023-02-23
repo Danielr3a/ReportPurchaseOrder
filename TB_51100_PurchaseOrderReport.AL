@@ -1,5 +1,6 @@
 table 51100 "Purchase Order"
 {
+    TableType = Temporary;
     DataClassification = ToBeClassified;
 
     fields
