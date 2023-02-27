@@ -11,6 +11,7 @@ query 51100 "Purchase Order"
             column(Purchaser_Code; "Purchaser Code") { }
             dataitem(Purchase_Line; "Purchase Line")
             {
+                DataItemLink = "Document No." = Purchase_Header."No.";
                 column(Description_; "Description") { }
                 column(No_; "No.") { }
                 column(Document_No_; "Document No.") { }

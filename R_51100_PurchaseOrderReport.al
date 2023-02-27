@@ -4,16 +4,31 @@ report 51100 "Purchase Order Report"
     ApplicationArea = All;
     AdditionalSearchTerms = 'Purchase Order Report';
     DefaultLayout = RDLC;
-    RDLCLayout = 'Purchase Order Report.rdl'
+    RDLCLayout = 'PurchaseOrderReport.rdl';
 
 
 
     dataset
     {
-        dataitem(DataItemName; SourceTableName)
+        dataitem("Purchase Header"; "Purchase Header")
         {
-            column(ColumnName; SourceFieldName)
+            // DataItemTableView = sorting("No.")
+            column(Buy_from_Vendor_Name_; "Buy-from Vendor Name") { }
+            column(Document_Date; "Document Date") { }
+            column(Order_Date; "Order Date") { }
+            column(Shortcut_Dimension_1_Code; "Shortcut Dimension 1 Code") { }
+            column(Purchaser_Code; "Purchaser Code") { }
+
+            dataitem(Purchase_Line; "Purchase Line")
             {
+                // DataItemLink = "Document No." = Purchase_Header."No.";
+                column(Description_; "Description") { }
+                column(No_; "No.") { }
+                column(Document_No_; "Document No.") { }
+                column(Quantity; Quantity) { }
+                column(Expected_Receipt_Date; "Expected Receipt Date") { }
+                column(Qty__to_Receive; "Qty. to Receive") { }
+                column(Qty__Received__Base_; "Qty. Received (Base)") { }
 
             }
         }
@@ -21,17 +36,24 @@ report 51100 "Purchase Order Report"
 
     requestpage
     {
+        SaveValues = true;
         layout
         {
             area(Content)
             {
-                group(GroupName)
+                group(Filters)
                 {
-                    field(Name; SourceExpression)
+                    field("No. PO"; );
                     {
+                        Caption = 'No. PO';
                         ApplicationArea = All;
 
                     }
+                    field("Vendor Number"; Vendor_No)
+                    {
+                        ApplicationArea = All;
+                    }
+                    
                 }
             }
         }
@@ -61,3 +83,4 @@ report 51100 "Purchase Order Report"
     var
         myInt: Integer;
 }
+

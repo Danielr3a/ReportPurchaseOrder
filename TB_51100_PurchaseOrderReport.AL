@@ -5,7 +5,7 @@ table 51100 "Purchase Order"
 
     fields
     {
-        field(1; "Row No."; Integer)
+        field(1; RowNo; Integer)
         {
             Caption = 'No.';
             DataClassification = ToBeClassified;
@@ -133,3 +133,4 @@ table 51100 "Purchase Order"
     end;
 
 }
+

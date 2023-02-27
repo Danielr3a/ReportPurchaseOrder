@@ -30,7 +30,7 @@ page 51100 "Purchase Order Report"
                     ApplicationArea = All;
 
                 }
-                field("Part No."; rec."No.") //<---
+                field("Part No."; rec."No.")
                 {
                     Caption = 'Part No.';
                     ApplicationArea = All;
@@ -127,13 +127,34 @@ page 51100 "Purchase Order Report"
 
     trigger OnOpenPage()
     var
+        CompanyInformation: Record "Company Information";
         QuerySummary: Query "Purchase Order";
     begin
         if QuerySummary.Open() then begin
             while QuerySummary.Read() do begin
                 rec.Init();
+                rec.RowNo := rec.RowNo + 1;//??;
+                rec."Buy-from Vendor Name" := QuerySummary.Buy_from_Vendor_Name_;
+                rec.Description := QuerySummary.Description_;
+                rec."No." := QuerySummary.No_;
+                rec."Document No." := QuerySummary.Document_No_;
+                rec."Document Date" := QuerySummary.Document_Date;
+                rec.Quantity := QuerySummary.Quantity;
+                rec."Expected Receipt Date" := QuerySummary.Expected_Receipt_Date;
+                rec."Qty. to Receive" := QuerySummary.Qty__to_Receive;
+                rec."Order Date" := QuerySummary.Order_Date;
+                rec."Shortcut Dimension 1 Code" := QuerySummary.Shortcut_Dimension_1_Code;
+                rec."Purchaser Code" := QuerySummary.Purchaser_Code;
+                rec."To be approved by user id" := Rec."To be approved by user id";
+                rec."Last Date-Time Modified" := Rec."Last Date-Time Modified";
+                rec."Qty. Received" := QuerySummary.Qty__Received__Base_;
 
             end;
+            QuerySummary.Close();
+        end;
+        if CompanyInformation.FindFirst() then begin
+            CompanyInformation.CalcFields(Picture);
+            rec."Company Logo" := CompanyInformation.Picture;
         end;
     end;
 
