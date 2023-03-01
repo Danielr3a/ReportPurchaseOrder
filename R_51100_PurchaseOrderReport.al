@@ -12,7 +12,8 @@ report 51100 "Purchase Order Report"
     {
         dataitem("Purchase Header"; "Purchase Header")
         {
-            // DataItemTableView = sorting("No.")
+            RequestFilterFields = "Buy-from vendor No.";
+
             column(Buy_from_Vendor_Name_; "Buy-from Vendor Name") { }
             column(Document_Date; "Document Date") { }
             column(Order_Date; "Order Date") { }
@@ -21,7 +22,8 @@ report 51100 "Purchase Order Report"
 
             dataitem(Purchase_Line; "Purchase Line")
             {
-                // DataItemLink = "Document No." = Purchase_Header."No.";
+                RequestFilterFields = "Document No.", "Expected Receipt Date";
+                // DataItemLink = "Document No." = field("");
                 column(Description_; "Description") { }
                 column(No_; "No.") { }
                 column(Document_No_; "Document No.") { }
@@ -29,58 +31,73 @@ report 51100 "Purchase Order Report"
                 column(Expected_Receipt_Date; "Expected Receipt Date") { }
                 column(Qty__to_Receive; "Qty. to Receive") { }
                 column(Qty__Received__Base_; "Qty. Received (Base)") { }
-
+                // column(Company_Logo_; "I") { }
             }
-        }
-    }
-
-    requestpage
-    {
-        SaveValues = true;
-        layout
-        {
-            area(Content)
+            dataitem("Workflows Entries Buffer"; "Workflows Entries Buffer")
             {
-                group(Filters)
-                {
-                    field("No. PO"; );
-                    {
-                        Caption = 'No. PO';
-                        ApplicationArea = All;
-
-                    }
-                    field("Vendor Number"; Vendor_No)
-                    {
-                        ApplicationArea = All;
-                    }
-                    
-                }
-            }
-        }
-
-        actions
-        {
-            area(processing)
-            {
-                action(ActionName)
-                {
-                    ApplicationArea = All;
-
-                }
+                // ?? DataItemLink = "To be approved by user id" = field("Buy-from Vendor Name");
+                column(To_Be_Approved_By_User_ID; "To Be Approved By User ID")
+                { }
+                column(Last_Date_Time_Modified; "Last Date-Time Modified") { }
             }
         }
     }
 
-    rendering
-    {
-        layout(LayoutName)
-        {
-            Type = RDLC;
-            LayoutFile = 'mylayout.rdl';
-        }
-    }
+    // trigger OnPreReport()
+    // var
 
-    var
-        myInt: Integer;
+
+    // requestpage
+    // {
+    //     SaveValues = true;
+    //     layout
+    //     {
+    //         area(Content)
+    //         {
+    //             group(Filters)
+    //             {
+    //                 field("Document No."; DocumentNo)
+    //                 {
+    //                     Caption = 'No. PO';
+    //                     ApplicationArea = All;
+
+    //                 }
+    //                 field("Buy-from Vendor Name"; VendorNumber)
+    //                 {
+    //                     Caption = 'Vendor #';
+    //                     ApplicationArea = All;
+    //                 }
+
+    //                 field("Expected receipt date"; Expected receipt date) {}
+
+    //             }
+    //         }
+    //     }
+
+    //     actions
+    //     {
+    //         area(processing)
+    //         {
+    //             action(ActionName)
+    //             {
+    //                 ApplicationArea = All;
+
+    //             }
+    //         }
+    //     }
+    // }
+
+    //     rendering
+    //     {
+    //         layout(LayoutName)
+    //         {
+    //             Type = RDLC;
+    //             LayoutFile = 'mylayout.rdl';
+    //         }
+    //     }
+
+    //     var
+    //         myInt: Integer;
+    // }
+
 }
-

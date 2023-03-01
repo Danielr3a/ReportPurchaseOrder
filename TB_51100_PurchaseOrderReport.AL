@@ -77,19 +77,19 @@ table 51100 "Purchase Order"
             DataClassification = ToBeClassified;
 
         }
-        field(120; "To be approved by user id"; Integer)
+        field(120; "To be approved by user id"; Code[50])
         {
             Caption = 'Approved By';
             DataClassification = ToBeClassified;
 
         }
-        field(130; "Last Date-Time Modified"; Integer)
+        field(130; "Last Date-Time Modified"; DateTime)
         {
             Caption = 'Approved Date';
             DataClassification = ToBeClassified;
 
         }
-        field(140; "Qty. Received"; Integer)
+        field(140; "Qty. Received"; Decimal)
         {
             Caption = 'PO Qty Received';
             DataClassification = ToBeClassified;
@@ -103,34 +103,34 @@ table 51100 "Purchase Order"
 
     keys
     {
-        key(PK; "No.")
+        key(PK; "Buy-from Vendor Name")
         {
             Clustered = true;
         }
     }
 
-    var
-        myInt: Integer;
+    // var
+    //     myInt: Integer;
 
-    trigger OnInsert()
-    begin
+    // trigger OnInsert()
+    // begin
 
-    end;
+    // end;
 
-    trigger OnModify()
-    begin
+    // trigger OnModify()
+    // begin
 
-    end;
+    // end;
 
-    trigger OnDelete()
-    begin
+    // trigger OnDelete()
+    // begin
 
-    end;
+    // end;
 
-    trigger OnRename()
-    begin
+    // trigger OnRename()
+    // begin
 
-    end;
+    // end;
 
 }
 

@@ -19,8 +19,16 @@ query 51100 "Purchase Order"
                 column(Expected_Receipt_Date; "Expected Receipt Date") { }
                 column(Qty__to_Receive; "Qty. to Receive") { }
                 column(Qty__Received__Base_; "Qty. Received (Base)") { }
-
+                dataitem(Workflows_Entries_Buffer; "Workflows Entries Buffer")
+                {
+                    DataItemLink = "To Be Approved By User ID" = Purchase_Header."Buy-from Vendor Name";
+                    column(To_Be_Approved_By_User_ID; "To Be Approved By User ID") { }
+                    column(Last_Date_Time_Modified; "Last Date-Time Modified") { }
+                }
             }
+
+
         }
+
     }
 }

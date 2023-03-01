@@ -4,7 +4,7 @@ page 51100 "Purchase Order Report"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Purchase Order";
-    SourceTableView = sorting("No.") order(descending);
+    SourceTableView = sorting("Buy-from Vendor Name") order(descending);
 
     layout
     {
@@ -113,10 +113,11 @@ page 51100 "Purchase Order Report"
     {
         area(Processing)
         {
-            action(ActionName)
+            action("Report Purchase Order")
             {
                 ApplicationArea = All;
-
+                Caption = 'Recibo de Material - Material Receipt';
+                Image = Filter;
                 trigger OnAction();
                 begin
 
@@ -145,8 +146,8 @@ page 51100 "Purchase Order Report"
                 rec."Order Date" := QuerySummary.Order_Date;
                 rec."Shortcut Dimension 1 Code" := QuerySummary.Shortcut_Dimension_1_Code;
                 rec."Purchaser Code" := QuerySummary.Purchaser_Code;
-                rec."To be approved by user id" := Rec."To be approved by user id";
-                rec."Last Date-Time Modified" := Rec."Last Date-Time Modified";
+                rec."To be approved by user id" := QuerySummary.To_Be_Approved_By_User_ID;
+                rec."Last Date-Time Modified" := QuerySummary.Last_Date_Time_Modified;
                 rec."Qty. Received" := QuerySummary.Qty__Received__Base_;
 
             end;
