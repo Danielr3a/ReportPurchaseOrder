@@ -107,6 +107,10 @@ table 51100 "Purchase Order"
         {
             Clustered = true;
         }
+        key(key2; "Buy-from Vendor Name")
+        {
+
+        }
     }
 
     // var
