@@ -12,8 +12,10 @@ report 51100 "Purchase Order Report"
     {
         dataitem("Purchase Header"; "Purchase Header")
         {
-            RequestFilterFields = "Buy-from vendor No.";
-
+            DataItemTableView = sorting("Buy-from Vendor No.");
+            PrintOnlyIfDetail = true;
+            RequestFilterFields = "Buy-from Vendor No.";
+            column(RowNo; RowNo) { }
             column(Buy_from_Vendor_Name_; "Buy-from Vendor Name") { }
             column(Document_Date; "Document Date") { }
             column(Order_Date; "Order Date") { }
@@ -43,61 +45,47 @@ report 51100 "Purchase Order Report"
         }
     }
 
-    // trigger OnPreReport()
-    // var
+
+    requestpage
+    {
+        SaveValues = true;
+        layout
+        {
+            area(Content)
+            {
+                // group(Filters)
+                // {
+                //     field();
+                //     }
+            }
+        }
+
+        actions
+        {
+            area(processing)
+            {
+                action(ActionName)
+                {
+                    ApplicationArea = All;
+
+                }
+            }
+        }
+    }
 
 
-    // requestpage
+    // rendering
     // {
-    //     SaveValues = true;
-    //     layout
+    //     layout(LayoutName)
     //     {
-    //         area(Content)
-    //         {
-    //             group(Filters)
-    //             {
-    //                 field("Document No."; DocumentNo)
-    //                 {
-    //                     Caption = 'No. PO';
-    //                     ApplicationArea = All;
-
-    //                 }
-    //                 field("Buy-from Vendor Name"; VendorNumber)
-    //                 {
-    //                     Caption = 'Vendor #';
-    //                     ApplicationArea = All;
-    //                 }
-
-    //                 field("Expected receipt date"; Expected receipt date) {}
-
-    //             }
-    //         }
-    //     }
-
-    //     actions
-    //     {
-    //         area(processing)
-    //         {
-    //             action(ActionName)
-    //             {
-    //                 ApplicationArea = All;
-
-    //             }
-    //         }
+    //         Type = RDLC;
+    //         LayoutFile = 'mylayout.rdl';
     //     }
     // }
 
-    //     rendering
-    //     {
-    //         layout(LayoutName)
-    //         {
-    //             Type = RDLC;
-    //             LayoutFile = 'mylayout.rdl';
-    //         }
-    //     }
+    var
+        RowNo: Integer;
 
-    //     var
-    //         myInt: Integer;
-    // }
+
 
 }

@@ -4,7 +4,8 @@ page 51100 "Purchase Order Report"
     ApplicationArea = All;
     UsageCategory = Lists;
     SourceTable = "Purchase Order";
-    SourceTableView = sorting("Buy-from Vendor Name") order(descending);
+    QueryCategory = 'Purchase Order';
+    SourceTableView = sorting(RowNo) order(descending);
 
     layout
     {
@@ -20,7 +21,7 @@ page 51100 "Purchase Order Report"
                 }
                 field("Vendor Name"; rec."Buy-from Vendor Name")
                 {
-                    Caption = '.Vendor Name';
+                    Caption = 'Vendor Name';
                     ApplicationArea = All;
 
                 }
@@ -103,25 +104,36 @@ page 51100 "Purchase Order Report"
                 }
             }
         }
-        area(Factboxes)
-        {
 
-        }
     }
 
     actions
     {
         area(Processing)
         {
-            action("Report Purchase Order")
+            group(Action1)
             {
-                ApplicationArea = All;
                 Caption = 'Recibo de Material - Material Receipt';
-                Image = Filter;
-                trigger OnAction();
-                begin
+                Image = Receipt;
+                action(POReport)
+                {
+                    ApplicationArea = Basic, Suite;
+                    Caption = '&Recibo de Material - Material Receipt';
+                    Ellipsis = true;
+                    Image = Check;
+                    ToolTip = 'PO Report';
 
-                end;
+                    trigger OnAction();
+                    var
+                        // POR: Record "Purchase Header";
+                        POR: Report "Purchase Order Report";
+                    begin
+
+                        Clear(POR);
+                        POR.RunModal();
+
+                    end;
+                }
             }
         }
     }
@@ -135,7 +147,7 @@ page 51100 "Purchase Order Report"
             while QuerySummary.Read() do begin
                 rec.Init();
                 rec.RowNo := rec.RowNo + 1;//??;
-                rec."Buy-from Vendor Name" := QuerySummary.Buy_from_Vendor_Name_;
+                rec."Buy-from Vendor Name" := QuerySummary.Buy_from_Vendor_Name;
                 rec.Description := QuerySummary.Description_;
                 rec."No." := QuerySummary.No_;
                 rec."Document No." := QuerySummary.Document_No_;

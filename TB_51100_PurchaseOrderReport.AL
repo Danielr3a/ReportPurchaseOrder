@@ -103,7 +103,7 @@ table 51100 "Purchase Order"
 
     keys
     {
-        key(PK; "Buy-from Vendor Name")
+        key(PK; RowNo)
         {
             Clustered = true;
         }

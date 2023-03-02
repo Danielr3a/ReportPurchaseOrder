@@ -4,14 +4,14 @@ query 51100 "Purchase Order"
     {
         dataitem(Purchase_Header; "Purchase Header")
         {
-            column(Buy_from_Vendor_Name_; "Buy-from Vendor Name") { }
+            column(Buy_from_Vendor_Name; "Buy-from Vendor Name") { }
             column(Document_Date; "Document Date") { }
             column(Order_Date; "Order Date") { }
             column(Shortcut_Dimension_1_Code; "Shortcut Dimension 1 Code") { }
             column(Purchaser_Code; "Purchaser Code") { }
             dataitem(Purchase_Line; "Purchase Line")
             {
-                DataItemLink = "Document No." = Purchase_Header."No.";
+                DataItemLink = "Document No." = Purchase_Header."Buy-from Vendor No.";
                 column(Description_; "Description") { }
                 column(No_; "No.") { }
                 column(Document_No_; "Document No.") { }
@@ -26,7 +26,6 @@ query 51100 "Purchase Order"
                     column(Last_Date_Time_Modified; "Last Date-Time Modified") { }
                 }
             }
-
 
         }
 
