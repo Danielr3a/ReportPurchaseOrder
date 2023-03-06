@@ -25,8 +25,9 @@ report 51100 "Purchase Order Report"
             dataitem(Purchase_Line; "Purchase Line")
             {
                 RequestFilterFields = "Document No.", "Expected Receipt Date";
-                // DataItemLink = "Document No." = field("");
-                column(Description_; "Description") { }
+                // DataItemLink = "Planned Receipt Date" = field("Expected Receipt Date");
+                column(Description_; "Description")
+                { }
                 column(No_; "No.") { }
                 column(Document_No_; "Document No.") { }
                 column(Quantity; Quantity) { }
@@ -35,13 +36,25 @@ report 51100 "Purchase Order Report"
                 column(Qty__Received__Base_; "Qty. Received (Base)") { }
                 // column(Company_Logo_; "I") { }
             }
+
             dataitem("Workflows Entries Buffer"; "Workflows Entries Buffer")
             {
+                // DataItemTableView = sorting("Entry No.")
                 // ?? DataItemLink = "To be approved by user id" = field("Buy-from Vendor Name");
-                column(To_Be_Approved_By_User_ID; "To Be Approved By User ID")
-                { }
+                column(To_Be_Approved_By_User_ID; "To Be Approved By User ID") { }
                 column(Last_Date_Time_Modified; "Last Date-Time Modified") { }
             }
+
+            dataitem(Company_Information; "Company Information")
+            {
+                column(Picture; Picture) { }
+            }
+            trigger OnAfterGetRecord()
+            var
+            begin
+                RowNo := RowNo + 1;
+            end;
+
         }
     }
 
@@ -53,10 +66,17 @@ report 51100 "Purchase Order Report"
         {
             area(Content)
             {
-                // group(Filters)
-                // {
-                //     field();
-                //     }
+                group("ER Date")
+                {
+                    // field(Expected_Receipt_Date; Expected_Receipt_Date)
+                    // {
+
+                    //     Caption = 'Expected Receipt Date';
+                    //     TableRelation = "Purchase Line";
+                    //     ApplicationArea = All;
+
+                    // }
+                }
             }
         }
 
@@ -85,6 +105,8 @@ report 51100 "Purchase Order Report"
 
     var
         RowNo: Integer;
+
+        Expected_Receipt_Date: Date;
 
 
 

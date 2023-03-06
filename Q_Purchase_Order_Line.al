@@ -2,6 +2,7 @@ query 51100 "Purchase Order"
 {
     elements
     {
+
         dataitem(Purchase_Header; "Purchase Header")
         {
             column(Buy_from_Vendor_Name; "Buy-from Vendor Name") { }
@@ -24,10 +25,10 @@ query 51100 "Purchase Order"
                     DataItemLink = "To Be Approved By User ID" = Purchase_Header."Buy-from Vendor Name";
                     column(To_Be_Approved_By_User_ID; "To Be Approved By User ID") { }
                     column(Last_Date_Time_Modified; "Last Date-Time Modified") { }
+
+
                 }
             }
-
         }
-
     }
 }

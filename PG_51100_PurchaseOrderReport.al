@@ -58,7 +58,7 @@ page 51100 "Purchase Order Report"
                 field("Expected Receipt Date"; rec."Expected Receipt Date")
                 {
                     Caption = 'Expected Receipt Date';
-                    ApplicationArea = All;
+                    ApplicationArea = Basic, Suite;
 
                 }
                 field("Qty to receive"; rec."Qty. to Receive")
@@ -146,7 +146,7 @@ page 51100 "Purchase Order Report"
         if QuerySummary.Open() then begin
             while QuerySummary.Read() do begin
                 rec.Init();
-                rec.RowNo := rec.RowNo + 1;//??;
+                rec.RowNo := rec.RowNo;//??;
                 rec."Buy-from Vendor Name" := QuerySummary.Buy_from_Vendor_Name;
                 rec.Description := QuerySummary.Description_;
                 rec."No." := QuerySummary.No_;
