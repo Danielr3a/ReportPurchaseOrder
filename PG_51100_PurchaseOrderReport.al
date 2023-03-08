@@ -111,30 +111,30 @@ page 51100 "Purchase Order Report"
     {
         area(Processing)
         {
-            group(Action1)
+            // group(Action1)
+            // {
+            // Caption = 'Recibo de Material - Material Receipt';
+            // Image = Receipt;
+            action(POReport)
             {
-                Caption = 'Recibo de Material - Material Receipt';
+                ApplicationArea = Basic, Suite;
+                Caption = '&Recibo de Material - Material Receipt';
+                Ellipsis = true;
                 Image = Receipt;
-                action(POReport)
-                {
-                    ApplicationArea = Basic, Suite;
-                    Caption = '&Recibo de Material - Material Receipt';
-                    Ellipsis = true;
-                    Image = Check;
-                    ToolTip = 'PO Report';
+                ToolTip = 'PO Report';
 
-                    trigger OnAction();
-                    var
-                        // POR: Record "Purchase Header";
-                        POR: Report "Purchase Order Report";
-                    begin
+                trigger OnAction();
+                var
+                    // POR: Record "Purchase Header";
+                    POR: Report "Purchase Order Report";
+                begin
 
-                        Clear(POR);
-                        POR.RunModal();
+                    Clear(POR);
+                    POR.RunModal();
 
-                    end;
-                }
+                end;
             }
+            // }
         }
     }
 
